@@ -89,3 +89,37 @@ class CalcCommand:
             "Parse VASP calculation output files and convert to libcasm.xtal.Structure"
         )
         return None
+
+    def Outcar_to_json():
+    Structure = read(filename="OUTCAR", format= "vasp-out")
+
+    lattice_vectors = Structure.get_cell().tolist()
+    atom_type = Structure.get_chemical_symbols()
+    atom_coords = Structure.get_positions().tolist()
+    coordinate_mode = "direct"
+    forces = Structure.get_forces().tolist()
+    energy = Structure.get_total_energy()
+
+    json_data = {
+        "lattice_vectors": lattice_vectors,
+        "atom_type": atom_type,
+        "atom_coords": atom_coords,
+        "coordinate_mode": coordinate_mode,
+        "atom_properties": {
+            "forces": {
+                "value": forces
+            }
+        },
+        "global_properties": {
+            "energy": {
+                "value" : energy,
+            }
+        } 
+    }
+    output = "properties.calc.json"
+    with open(output, "w") as f:
+        json.dump(json_data, f, indent = 4)
+
+    print("OUTCAR successfully converted")
+    return None
+    
