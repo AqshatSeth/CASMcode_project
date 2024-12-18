@@ -96,7 +96,7 @@ class CalcCommand:
     lattice_vectors = Structure.get_cell().tolist()
     atom_type = Structure.get_chemical_symbols()
     atom_coords = Structure.get_positions().tolist()
-    coordinate_mode = "direct"
+    coordinate_mode = "Cartesian"
     forces = Structure.get_forces().tolist()
     energy = Structure.get_total_energy()
 
