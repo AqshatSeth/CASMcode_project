@@ -106,7 +106,7 @@ class CalcCommand:
         "atom_coords": atom_coords,
         "coordinate_mode": coordinate_mode,
         "atom_properties": {
-            "forces": {
+            "force": {
                 "value": forces
             }
         },
